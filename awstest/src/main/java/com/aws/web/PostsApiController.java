@@ -18,6 +18,11 @@ import lombok.RequiredArgsConstructor;
 @RestController
 public class PostsApiController {
 	private final PostsService postsService;
+	
+	@GetMapping("/")
+	public String index() {
+		return "index";
+	}
 
 	@PostMapping("/api/v1/posts")
 	public Long save(@RequestBody PostsSaveRequestDto requestDto) {
@@ -33,4 +38,7 @@ public class PostsApiController {
 	public PostsResponseDto findById(@PathVariable Long id) {
 		return postsService.findById(id);
 	}
+	
+//	@GetMapping("/posts/update/{id}")
+//	public String postsUpdate(@PathVariable Long id, )
 }

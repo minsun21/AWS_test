@@ -1,10 +1,15 @@
 package com.aws.service.posts;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import com.aws.domain.posts.Posts;
 import com.aws.domain.posts.PostsRepository;
+import com.aws.web.dto.PostsListResponseDto;
 import com.aws.web.dto.PostsResponseDto;
 import com.aws.web.dto.PostsSaveRequestDto;
 import com.aws.web.dto.PostsUpdateRequestDto;
@@ -34,4 +39,9 @@ public class PostsService {
 				.orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다. id=" + id));
 		return new PostsResponseDto(entity);
 	}
+
+//	@Transactional(readOnly = true)
+//	public List<PostsListResponseDto> findAllDesc() {
+//		return postsRepository.findAllDesc().stream().map(PostsListResponseDto::new).collect(Collectors.toList());
+//	}
 }
