@@ -1,5 +1,8 @@
 package com.aws.web;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -37,16 +40,13 @@ public class PostsApiController {
 		return postsService.update(id, requestDto);
 	}
 
-	@PutMapping("/api/v1/posts/remove/{id}")
-	public Result remove(@PathVariable Long id) {
-		return new Result(postsService.delete(id), Constants.RESULT_SUCCESS);
+	@PostMapping("/api/v1/posts/remove")
+	public Result remove(@RequestBody Map<String, List<Long>> ids) {
+		return new Result(postsService.delete(ids.get("rowIds")), Constants.RESULT_SUCCESS);
 	}
 
-	@GetMapping("/api/v1/posts/{id}")
-	public PostsResponseDto findById(@PathVariable Long id) {
-		return postsService.findById(id);
+	@GetMapping("/api/v1/posts/get/{id}")
+	public Result findById(@PathVariable Long id) {
+		return new Result(postsService.findById(id), Constants.RESULT_SUCCESS);
 	}
-
-//	@GetMapping("/posts/update/{id}")
-//	public String postsUpdate(@PathVariable Long id, )
 }

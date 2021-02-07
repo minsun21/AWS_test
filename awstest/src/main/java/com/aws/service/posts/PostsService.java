@@ -35,10 +35,12 @@ public class PostsService {
 	}
 
 	@Transactional
-	public List<PostsListResponseDto> delete(Long id) {
-		Posts posts = postsRepository.findById(id)
-				.orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다. id=" + id));
-		postsRepository.delete(posts);
+	public List<PostsListResponseDto> delete(List<Long> ids) {
+		for (Long id : ids) {
+			Posts posts = postsRepository.findById(id)
+					.orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다. id=" + id));
+			postsRepository.delete(posts);
+		}
 		return findAllDesc();
 	}
 
