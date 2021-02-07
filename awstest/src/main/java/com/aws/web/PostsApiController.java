@@ -16,12 +16,12 @@ import com.aws.web.dto.Result;
 
 import lombok.RequiredArgsConstructor;
 
+@SuppressWarnings({ "unchecked", "rawtypes" })
 @RequiredArgsConstructor
 @RestController
 public class PostsApiController {
 	private final PostsService postsService;
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@GetMapping("/api/v1/posts/list")
 	public Result index() {
 		return new Result(postsService.findAllDesc(), Constants.RESULT_SUCCESS);
@@ -32,9 +32,14 @@ public class PostsApiController {
 		return postsService.save(requestDto);
 	}
 
-	@PutMapping("/api/v1/posts/{id}")
+	@PutMapping("/api/v1/posts/edit/{id}")
 	public Long update(@PathVariable Long id, @RequestBody PostsUpdateRequestDto requestDto) {
 		return postsService.update(id, requestDto);
+	}
+
+	@PutMapping("/api/v1/posts/remove/{id}")
+	public Result remove(@PathVariable Long id) {
+		return new Result(postsService.delete(id), Constants.RESULT_SUCCESS);
 	}
 
 	@GetMapping("/api/v1/posts/{id}")
