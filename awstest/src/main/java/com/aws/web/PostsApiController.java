@@ -7,10 +7,12 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.aws.constants.Constants;
 import com.aws.service.posts.PostsService;
 import com.aws.web.dto.PostsResponseDto;
 import com.aws.web.dto.PostsSaveRequestDto;
 import com.aws.web.dto.PostsUpdateRequestDto;
+import com.aws.web.dto.Result;
 
 import lombok.RequiredArgsConstructor;
 
@@ -18,10 +20,11 @@ import lombok.RequiredArgsConstructor;
 @RestController
 public class PostsApiController {
 	private final PostsService postsService;
-	
-	@GetMapping("/")
-	public String index() {
-		return "index";
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@GetMapping("/api/v1/posts/list")
+	public Result index() {
+		return new Result(postsService.findAllDesc(), Constants.RESULT_SUCCESS);
 	}
 
 	@PostMapping("/api/v1/posts")
@@ -33,12 +36,12 @@ public class PostsApiController {
 	public Long update(@PathVariable Long id, @RequestBody PostsUpdateRequestDto requestDto) {
 		return postsService.update(id, requestDto);
 	}
-	
+
 	@GetMapping("/api/v1/posts/{id}")
 	public PostsResponseDto findById(@PathVariable Long id) {
 		return postsService.findById(id);
 	}
-	
+
 //	@GetMapping("/posts/update/{id}")
 //	public String postsUpdate(@PathVariable Long id, )
 }

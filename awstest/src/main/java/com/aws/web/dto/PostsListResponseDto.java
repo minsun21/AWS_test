@@ -10,13 +10,17 @@ import lombok.Getter;
 public class PostsListResponseDto {
 	private Long id;
 	private String title;
-	private String autor;
-	private LocalDateTime modifiedDate;
+	private String author;
+	private String content;
+	private String viewCount;
+	private LocalDateTime createDate;
 
 	public PostsListResponseDto(Posts entity) {
 		this.id = entity.getId();
 		this.title = entity.getTitle();
-		this.autor = entity.getAuthor();
-		this.modifiedDate = entity.getModifedDate();
+		this.content = entity.getContent();
+		this.author = entity.getAuthor();
+		this.viewCount = String.valueOf(entity.getViewCount());
+		this.createDate = entity.getCreatedDate();
 	}
 }
