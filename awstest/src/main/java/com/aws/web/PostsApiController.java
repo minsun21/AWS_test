@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.aws.constants.Constants;
 import com.aws.service.posts.PostsService;
-import com.aws.web.dto.PostsResponseDto;
 import com.aws.web.dto.PostsSaveRequestDto;
 import com.aws.web.dto.PostsUpdateRequestDto;
 import com.aws.web.dto.Result;
