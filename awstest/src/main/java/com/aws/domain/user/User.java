@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import com.aws.domain.BaseTimeEntity;
+import com.aws.domain.enums.SocialType;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -25,32 +26,31 @@ public class User extends BaseTimeEntity {
 
 	@Column(nullable = false)
 	private String name;
-	
+
 	@Column(nullable = false)
 	private String email;
 
 	@Column
-	private String picture;
+	private String principal;
 
 	@Enumerated(EnumType.STRING)
 	@Column(nullable = false)
-	private Role role;
+	private SocialType socialType;
+
+	private String password;
 
 	@Builder
-	public User(String name, String email, String picutre, Role role) {
+	public User(String name, String email, String password, String picutre, String principal, SocialType socialType) {
 		this.name = name;
 		this.email = email;
-		this.picture = picutre;
-		this.role = role;
+		this.password = password;
+		this.socialType = socialType;
+		this.principal = principal;
 	}
 
 	public User update(String name, String picture) {
 		this.name = name;
-		this.picture = picture;
 		return this;
 	}
-	
-	public String getRoleKey() {
-		return this.role.getKey();
-	}
+
 }

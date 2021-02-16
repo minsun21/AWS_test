@@ -1,4 +1,4 @@
-package com.aws.web;
+package com.aws.web.controller;
 
 import java.util.List;
 import java.util.Map;
